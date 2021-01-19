@@ -1,0 +1,6 @@
+package com.example.exam.dto;
+
+public class MoiveUpdateDto {
+	private String title;
+	private double rating;
+}

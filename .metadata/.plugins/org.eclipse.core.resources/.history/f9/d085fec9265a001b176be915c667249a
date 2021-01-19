@@ -1,0 +1,14 @@
+package com.example.exam.dto;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+public class MovieSaveDto {
+
+	@NotNull(message = "영화 제목을 입력하세요")
+	private String title;
+	
+	@NotNull(message = "rating을 입력하세요")
+	private double rating;
+
+}

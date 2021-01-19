@@ -1,0 +1,12 @@
+package com.example.exam.dto;
+
+import javax.validation.constraints.NotBlank;
+
+public class MovieSaveDto {
+	
+	@NotBlank
+private String title;
+private double rating;
+	
+	
+}

@@ -1,0 +1,73 @@
+package com.example.exam.web;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.exam.dto.CommonDto;
+import com.example.exam.dto.MovieUpdateDto;
+import com.example.exam.dto.MovieSaveDto;
+import com.example.exam.model.Movie;
+import com.example.exam.repository.MovieRepository;
+
+@RestController
+public class MovieController {
+
+private MovieRepository movieRepository;
+
+public MovieController(MovieRepository movieRepository) {
+	this.movieRepository = movieRepository;
+}
+
+@GetMapping("/movie")
+public CommonDto<List<Movie>> findAll() {
+	System.out.println("영화 리스트 출력()");
+	return new CommonDto<>(HttpStatus.OK.value(), movieRepository.findAll()); // MessageConverter (JavaObject -> Json String)
+}
+
+@GetMapping("/movie/{id}")
+public CommonDto<Movie> findById(@PathVariable int id) {
+	System.out.println("영화 하나 출력");
+	return new CommonDto<>(HttpStatus.OK.value(), movieRepository.findById(id)); // MessageConverter (JavaObject -> Json String)
+}
+
+@PostMapping("/movie")
+public CommonDto<String> save(@Valid @RequestBody MovieSaveDto dto, BindingResult bindingResult) {
+	System.out.println("save()");
+	System.out.println("user : "+dto);
+	movieRepository.save(dto);
+	
+	return new CommonDto<>(HttpStatus.OK.value(), "ok");
+}
+
+@DeleteMapping("/movie/{id}")
+public CommonDto delete(@Valid @PathVariable int id, BindingResult bindingResult) {
+	System.out.println("delete()");
+	movieRepository.delete(id);
+	return new CommonDto<>(HttpStatus.OK.value());
+}
+
+@PutMapping("/movie/{id}")
+public CommonDto update(@PathVariable int id,@Valid @RequestBody MovieUpdateDto dto, BindingResult bindingResult) {
+	System.out.println("update()");
+	movieRepository.update(dto);
+	return new CommonDto<>(HttpStatus.OK.value());
+}
+
+
+
+
+
+
+	
+}

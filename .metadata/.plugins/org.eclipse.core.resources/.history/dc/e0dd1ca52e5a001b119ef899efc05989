@@ -1,0 +1,18 @@
+package com.example.exam.dto;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import lombok.Data;
+
+@Data
+public class MovieUpdateDto {
+	
+	@NotBlank(message = "업데이트할 제목을 입력해주세요")
+	private String title;
+	
+	@Min(1)
+	private double rating;
+}

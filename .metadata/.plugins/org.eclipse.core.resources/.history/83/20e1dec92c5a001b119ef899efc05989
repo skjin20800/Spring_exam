@@ -1,0 +1,6 @@
+package com.example.exam.dto;
+
+public class MovieUpdateDto {
+	private String title;
+	private double rating;
+}
